@@ -11,7 +11,7 @@
  Target Server Version : 100418
  File Encoding         : 65001
 
- Date: 17/05/2021 20:43:35
+ Date: 18/05/2021 05:54:06
 */
 
 SET NAMES utf8mb4;
@@ -400,6 +400,27 @@ INSERT INTO `eigen_kriteria` VALUES (3, '0.225', '2021-05-02', 3);
 INSERT INTO `eigen_kriteria` VALUES (4, '0.109', '2021-05-02', 4);
 INSERT INTO `eigen_kriteria` VALUES (5, '0.196', '2021-05-02', 5);
 INSERT INTO `eigen_kriteria` VALUES (6, '0.126', '2021-05-02', 6);
+
+-- ----------------------------
+-- Table structure for hasil_rangking
+-- ----------------------------
+DROP TABLE IF EXISTS `hasil_rangking`;
+CREATE TABLE `hasil_rangking`  (
+  `seq` int NOT NULL AUTO_INCREMENT,
+  `alternatif_seq` int NULL DEFAULT NULL,
+  `value` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `rangking` int NULL DEFAULT NULL,
+  `kategori_seq` int NULL DEFAULT NULL,
+  PRIMARY KEY (`seq`) USING BTREE,
+  INDEX `fk_alter`(`alternatif_seq`) USING BTREE,
+  INDEX `fkkategori`(`kategori_seq`) USING BTREE,
+  CONSTRAINT `fk_alter` FOREIGN KEY (`alternatif_seq`) REFERENCES `alternatif` (`seq`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fkkategori` FOREIGN KEY (`kategori_seq`) REFERENCES `kategori_alternatif` (`seq`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of hasil_rangking
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for kategori_alternatif
